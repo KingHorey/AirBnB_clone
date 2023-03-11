@@ -25,6 +25,9 @@ class Console(Cmd):
         """ prints hello and the arg to stdout """
         with open("filestorage.json", encoding="UTF-8", mode="r+") as file:
             pass
+
+    def do_state(self, arg):
+        """ create a state object """
             
     def emptyline(self):
         pass
