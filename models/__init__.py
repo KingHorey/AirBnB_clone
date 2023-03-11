@@ -1,5 +1,8 @@
 #!/usr/bin/python3
 
-import json
-import datetime
 
+
+from engine import file_storage as file
+
+storage = file.FileStorage()
+storage.reload()

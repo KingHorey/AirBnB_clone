@@ -7,10 +7,16 @@ import json
 
 class BaseModel:
     """ Base model to be used in instantiation """
-    def __init__(self):
-        self.created_at = datetime.datetime.today()
-        self.updated_at = datetime.datetime.today()
-        self.id = str(uuid4())
+    def __init__(self, *args, **kwargs):
+        if (kwargs):
+            {k: v for k, v in kwargs.items() if k != "__class__"}
+            self.created_at = datetime.datetime.strptime(kwargs.get('created_at'), "%Y-%m-%d %H:%M:%S.%f")
+            self.updated_at = datetime.datetime.strptime(kwargs.get('updated_at'), "%Y-%m-%d %H:%M:%S.%f")
+            self.id = kwargs.get('id')
+        else:
+            self.created_at = datetime.datetime.today()
+            self.updated_at = datetime.datetime.today()
+            self.id = str(uuid4())
 
     def save(self):
         """ Method updated the updated_at attribute of the object """
