@@ -2,15 +2,11 @@
 
 """Import cmd module for shell like application"""
 import cmd
+""" readline allows for an empty line to not process
+previous command"""
 import readline
+""" sys module to exit interpreter """
 import sys
-from models.base_model import BaseModel
-import signal
-
-print("Welcome to the console")
-print("type: help <command> to get further information about the command")
-print("do <command> to carry out the command\n")
-print("==========================================================\n")
 
 
 class HBNBCommand(cmd.Cmd):
@@ -19,22 +15,10 @@ class HBNBCommand(cmd.Cmd):
         super().__init__()
         self.prompt = "(hbnb) "
 
-    def help_update(self):
-        print("Opens the filestorage.json file and updates the instance")
-
-    def do_update(self, arg):
-        """ prints hello and the arg to stdout """
-        with open("filestorage.json", encoding="UTF-8", mode="r+") as file:
-            pass
-
     def emptyline(self):
         """ Prevents execution of previous command
         when enter is pressed on an empty line"""
         pass
-
-    def do_update(self, *args, **kwargs):
-        with open("filestorage.json", mode="r+", encoding="UTF-8") as f:
-            pass
 
     def do_quit(self, arg):
         """ Quit the console """
