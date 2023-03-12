@@ -17,7 +17,6 @@ class HBNBCommand(cmd.Cmd):
     """ Class for creating console to connect with backend """
     def __init__(self):
         super().__init__()
-        #signal.signal(signal
         self.prompt = "(hbnb) "
 
     def help_update(self):
@@ -28,16 +27,15 @@ class HBNBCommand(cmd.Cmd):
         with open("filestorage.json", encoding="UTF-8", mode="r+") as file:
             pass
 
-    def do_state(self, arg):
-        """ create a state object """
-            
     def emptyline(self):
+        """ Prevents execution of previous command
+        when enter is pressed on an empty line"""
         pass
-      
+
     def do_update(self, *args, **kwargs):
         with open("filestorage.json", mode="r+", encoding="UTF-8") as f:
             pass
-      
+
     def do_quit(self, arg):
         """ Quit the console """
         sys.exit(1)
@@ -45,5 +43,7 @@ class HBNBCommand(cmd.Cmd):
     def do_EOF(self, arg):
         """ Exit the command interpreter on EOF"""
         sys.exit(1)
+
+
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
