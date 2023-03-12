@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-import datetime
+from datetime import datetime
 from uuid import uuid4
 import json
 from . import storage
@@ -11,18 +11,20 @@ class BaseModel:
     def __init__(self, *args, **kwargs):
         if (kwargs):
             {k: v for k, v in kwargs.items() if k != "__class__"}
-            self.created_at = datetime.datetime.strptime(kwargs.get('created_at'), "%Y-%m-%d %H:%M:%S.%f")
-            self.updated_at = datetime.datetime.strptime(kwargs.get('updated_at'), "%Y-%m-%d %H:%M:%S.%f")
+            self.created_at = datetime.strptime(kwargs.get('created_at'),
+                                                "%Y-%m-%d %H:%M:%S.%f")
+            self.updated_at = datetime.strptime(kwargs.get('updated_at'),
+                                                "%Y-%m-%d %H:%M:%S.%f")
             self.id = kwargs.get('id')
         else:
-            self.created_at = datetime.datetime.today()
-            self.updated_at = datetime.datetime.today()
+            self.created_at = datetime.today()
+            self.updated_at = datetime.today()
             self.id = str(uuid4())
             storage.new(self)
 
     def save(self):
         """ Method updated the updated_at attribute of the object """
-        time = datetime.datetime.now()
+        time = datetime.now()
         self.updated_at = time
         storage.save()
 
