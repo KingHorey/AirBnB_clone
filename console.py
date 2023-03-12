@@ -1,10 +1,11 @@
 #!/usr/bin/python3
 
 """Import cmd module for shell like application"""
-from cmd import Cmd
+import cmd
 import readline
 import sys
-from models.BaseModel import BaseModel
+from models.base_model import BaseModel
+import signal
 
 print("Welcome to the console")
 print("type: help <command> to get further information about the command")
@@ -12,10 +13,11 @@ print("do <command> to carry out the command\n")
 print("==========================================================\n")
 
 
-class Console(Cmd):
+class HBNBCommand(cmd.Cmd):
     """ Class for creating console to connect with backend """
     def __init__(self):
         super().__init__()
+        #signal.signal(signal
         self.prompt = "(hbnb) "
 
     def help_update(self):
@@ -39,7 +41,9 @@ class Console(Cmd):
     def do_quit(self, arg):
         """ Quit the console """
         sys.exit(1)
-  
+
+    def do_EOF(self, arg):
+        """ Exit the command interpreter on EOF"""
+        sys.exit(1)
 if __name__ == "__main__":
-  cmd = Console()
-  cmd.cmdloop()
+    HBNBCommand().cmdloop()

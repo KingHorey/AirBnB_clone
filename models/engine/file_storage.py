@@ -2,10 +2,11 @@
 
 """ Import json for serialization and deserialization """
 import json
+import os
 
 class FileStorage:
     """ Class stores a class object into a file so it can be used """
-    __file_path = "json_data.json"
+    __file_path = "file_storage.json"
     __objects = {}
 
     # def __init__(self) -> None:
@@ -15,22 +16,29 @@ class FileStorage:
       return (FileStorage.__objects)
     
     def new(self, obj):
-       FileStorage.__objects[obj.__class__.__name__.id] = obj
+        """ Sets the key of an object to Classname.id"""
+        key = "{}.{}".format(obj.__class__.__name__, obj.id)
+        self.__objects[key] = obj
 
     def save(self):
        """ Serializes an object to file """
-       with open(FileStorage.__file_path, mode="a+") as f:
-          data = json.dumps(FileStorage.__objects)
+       new_dict = {}
+       for k, v in self.__objects.items():
+             new_dict[k] = v.to_dict()
+       with open(self.__file_path, mode="a+") as f:
+          data = json.dumps(new_dict)
+          print(data)
           f.write(data)
 
     def reload(self):
       """ Deserializes an object back into the file storage """
-      if(FileStorage.__file_path):
-        with open(FileStorage.__file_path) as f:
+      try:
+        with open(self.__file_path) as f:
             string = f.read()
+            print(string)
             data = json.loads(string)
-        FileStorage.__objects = data
-      else:
+            self.__objects = data
+      except FileNotFoundError:
           pass
       
       

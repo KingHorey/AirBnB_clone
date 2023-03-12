@@ -3,6 +3,7 @@
 import datetime
 from uuid import uuid4
 import json
+from . import storage
 
 
 class BaseModel:
@@ -17,11 +18,13 @@ class BaseModel:
             self.created_at = datetime.datetime.today()
             self.updated_at = datetime.datetime.today()
             self.id = str(uuid4())
+            storage.new(self)
 
     def save(self):
         """ Method updated the updated_at attribute of the object """
         time = datetime.datetime.now()
         self.updated_at = time
+        storage.save()
 
     def to_dict(self):
         """ added __class__ key and value to __dict__"""
