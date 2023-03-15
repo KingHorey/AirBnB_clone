@@ -16,6 +16,10 @@ class BaseModel:
             self.updated_at = datetime.strptime(kwargs.get('updated_at'),
                                                 "%Y-%m-%d %H:%M:%S.%f")
             self.id = kwargs.get('id')
+            dirs = ["updated_at", "created_at", "id", "__class__"]
+            for k, v in kwargs.items():
+                if k not in dirs:
+                    setattr(self, k, v)
         else:
             self.created_at = datetime.today()
             self.updated_at = datetime.today()
@@ -29,7 +33,7 @@ class BaseModel:
         storage.save()
 
     def to_dict(self):
-        """ added __class__ key and value to __dict__ 
+        """ added __class__ key and value to __dict__
         return value: dictionary """
         self.__dict__.update({"__class__": self.__class__.__name__})
         return ({k: v if isinstance(v, int) else str(v)

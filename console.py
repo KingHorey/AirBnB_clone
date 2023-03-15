@@ -23,19 +23,33 @@ class HBNBCommand(cmd.Cmd):
 
     def do_all(self, arg):
         """ prints a string representation of all instances """
+        storage.reload()
+        db = storage.all()
+        print_instance = []
         if arg:
             if arg in globals():
-                db = storage.all()
                 for k in db.keys():
                     txt = k.split(".")
                     if arg == txt[0]:
-                        print(str(db[k]))
+                        key = "{}.{}".format(txt[0], txt[1])
+                        tmp_instance = globals()[txt[0]](**db[key])
+                        print_instance.append(str(tmp_instance))
             else:
                 print("** class doesn't exist **")
         else:
+            # storage.reload()
             db = storage.all()
-            for k, v in db.items():
-                print(str(k), str(v))
+            # print(db)
+            print("-------------\n\n\n")
+            temp_instance = []
+            for k in db.keys():
+                split_text = k.split(".")
+                key = "{}.{}".format(split_text[0], split_text[1])
+                tmp_instance = globals()[split_text[0]](**db[key])
+                # print("--> tmp", db[key])
+                print_instance.append(str(tmp_instance))
+            # print(temp_instance)
+        print(print_instance)
 
     def do_create(self, arg):
         """ creates a new instance, saves to JSON and prints id """
@@ -123,17 +137,25 @@ class HBNBCommand(cmd.Cmd):
                     obj_attr = text[2]
                     obj_value = text[3]
                     key = "{}.{}".format(obj_name, obj_id)
+                    storage.reload()
                     db = storage.all()
                     if key in db:
-                        if isinstance(db[key], dict):
-                            obj_name = db[key]["__class__"]
-                            temp_instance = globals()[obj_name](**db[key])
-                            setattr(temp_instance, obj_attr, obj_value)
-                            db[key] = temp_instance
-                            db[key].save()
-                        else:
-                            setattr(db[key], obj_attr, obj_value)
-                            db[key].save()
+                        obj = db[key]
+                        try:
+                            int_value = int(obj_value)
+                            obj.update({obj_attr: int_value})
+                        except ValueError:
+                            try:
+                                float_value = float(obj_value)
+                                obj.update({obj_attr: float_value})
+                            except ValueError:
+                                try:
+                                    obj.update({obj_attr: obj_value})
+                                except ValueError:
+                                    pass
+                        finally:
+                            obj1 = globals()[obj_name](**obj)
+                        BaseModel.save(obj1)
                     else:
                         print("** no instance found **")
                 else:

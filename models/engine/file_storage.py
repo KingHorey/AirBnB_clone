@@ -21,15 +21,16 @@ class FileStorage:
     def save(self):
         """ Serializes an object to file """
         # if ()
+        new_dicts = self.__objects.copy()
         new_dict = {}
-        for k, v in self.__objects.items():
+        for k, v in new_dicts.items():
             if isinstance(v, dict):
                 new_dict[k] = v
             else:
                 new_dict[k] = v.to_dict()
         with open(self.__file_path, mode="w") as f:
-            data = json.dumps(new_dict)
-            f.write(data)
+            json.dump(new_dict, f)
+            # f.write(data)
 
     def reload(self):
         """ Deserializes an object back into the file storage """
