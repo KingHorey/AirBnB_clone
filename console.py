@@ -63,6 +63,7 @@ class HBNBCommand(cmd.Cmd):
         """ deletes an instance based on the class name and id """
         if (arg):
             text = arg.split(" ")
+            print(text)
             if text[0] in globals():
                 if len(text) >= 2:
                     name = text[0]
@@ -129,7 +130,7 @@ class HBNBCommand(cmd.Cmd):
                     print("** attribute name missing **")
                 elif len(text) == 3:
                     print("** value missing **")
-                elif len(text) == 4:
+                elif len(text) >= 4:
                     obj_name = text[0]
                     obj_id = text[1]
                     obj_attr = text[2]
