@@ -5,15 +5,13 @@ import json
 
 
 class FileStorage:
-    """ Class stores a class object into a file so it can be used """
+    """ Class stores a class object into a file, so it can be used """
     __file_path = "file_storage.json"
     __objects = {}
 
     def all(self):
         """ Return self.__objects"""
-        for v in self.__objects.keys():
-            print(type(v))
-        return (self.__objects)
+        return self.__objects
 
     def new(self, obj):
         """ Sets the key of an object to Classname.id"""
@@ -22,9 +20,13 @@ class FileStorage:
 
     def save(self):
         """ Serializes an object to file """
+        # if ()
         new_dict = {}
         for k, v in self.__objects.items():
-            new_dict[k] = v.to_dict()
+            if isinstance(v, dict):
+                new_dict[k] = v
+            else:
+                new_dict[k] = v.to_dict()
         with open(self.__file_path, mode="w") as f:
             data = json.dumps(new_dict)
             f.write(data)

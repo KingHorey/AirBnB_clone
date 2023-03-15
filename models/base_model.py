@@ -29,7 +29,8 @@ class BaseModel:
         storage.save()
 
     def to_dict(self):
-        """ added __class__ key and value to __dict__"""
+        """ added __class__ key and value to __dict__ 
+        return value: dictionary """
         self.__dict__.update({"__class__": self.__class__.__name__})
         return ({k: v if isinstance(v, int) else str(v)
                  for k, v in self.__dict__.items()})

@@ -23,8 +23,8 @@ class HBNBCommand(cmd.Cmd):
 
     def do_all(self, arg):
         """ prints a string representation of all instances """
-        if (arg):
-            if (arg in globals()):
+        if arg:
+            if arg in globals():
                 db = storage.all()
                 for k in db.keys():
                     txt = k.split(".")
@@ -34,13 +34,13 @@ class HBNBCommand(cmd.Cmd):
                 print("** class doesn't exist **")
         else:
             db = storage.all()
-            for k in db.values():
-                print(str(k))
+            for k, v in db.items():
+                print(str(k), str(v))
 
     def do_create(self, arg):
-        """ creates a new instance, caves to JSON and prints id """
-        if (arg):
-            if (arg in globals()):
+        """ creates a new instance, saves to JSON and prints id """
+        if arg:
+            if arg in globals():
                 model = globals()[arg]()
                 storage.save()
                 print(model.id)
@@ -61,6 +61,7 @@ class HBNBCommand(cmd.Cmd):
                     db = storage.all()
                     if key in db:
                         del db[key]
+                        storage.save()
                         return
                     print("** no instance found **")
                 else:
@@ -83,12 +84,12 @@ class HBNBCommand(cmd.Cmd):
         """ Quit the console """
         sys.exit(1)
 
-    def do_show(self, arg):
+    def do_show(self, arg) -> None:
         """ Prints the string representation of an instance
         based on the class name and id """
-        if (arg):
+        if arg:
             text = arg.split(" ")
-            if (text[0] in globals()):
+            if text[0] in globals():
                 if len(text) == 2:
                     name = text[0]
                     ids = text[1]
@@ -105,8 +106,10 @@ class HBNBCommand(cmd.Cmd):
         else:
             print("** class name missing **")
 
-    def do_update(self, arg):
-        """updates an instance based on the class name and id"""
+    def do_update(self, arg) -> None:
+        """updates an instance based on the class name and id
+        Methodology: Create a new instance and setting the value
+        to the instance"""
         if arg:
             text = arg.split(" ")
             if text[0] in globals():
@@ -122,9 +125,15 @@ class HBNBCommand(cmd.Cmd):
                     key = "{}.{}".format(obj_name, obj_id)
                     db = storage.all()
                     if key in db:
-                        db[key][obj_attr] = obj_value
-                        # temp_instancsave()e(**)
-                        # storage.
+                        if isinstance(db[key], dict):
+                            obj_name = db[key]["__class__"]
+                            temp_instance = globals()[obj_name](**db[key])
+                            setattr(temp_instance, obj_attr, obj_value)
+                            db[key] = temp_instance
+                            db[key].save()
+                        else:
+                            setattr(db[key], obj_attr, obj_value)
+                            db[key].save()
                     else:
                         print("** no instance found **")
                 else:
