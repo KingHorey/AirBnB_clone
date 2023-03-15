@@ -38,7 +38,6 @@ class HBNBCommand(cmd.Cmd):
                 print("** class doesn't exist **")
         else:
             db = storage.all()
-            print("-------------\n\n\n")
             temp_instance = []
             for k in db.keys():
                 split_text = k.split(".")
