@@ -63,13 +63,12 @@ class HBNBCommand(cmd.Cmd):
         """ deletes an instance based on the class name and id """
         if (arg):
             text = arg.split(" ")
-            print(text)
             if text[0] in globals():
                 if len(text) >= 2:
                     name = text[0]
                     ids = text[1:]
-                    ids = "".join(ids)
-                    key = "{}.{}".format(name, ids)
+                    id_txt = "".join(ids)
+                    key = "{}.{}".format(name, id_txt)
                     db = storage.all()
                     if key in db:
                         del db[key]
