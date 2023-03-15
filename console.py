@@ -17,9 +17,7 @@ from models import storage
 
 class HBNBCommand(cmd.Cmd):
     """ Class for creating console to connect with backend """
-    def __init__(self):
-        super().__init__()
-        self.prompt = "(hbnb) "
+    prompt = "(hbnb) "
 
     def do_all(self, arg):
         """ prints a string representation of all instances """
@@ -98,7 +96,7 @@ class HBNBCommand(cmd.Cmd):
         """ Quit the console """
         sys.exit(1)
 
-    def do_show(self, arg) -> None:
+    def do_show(self, arg):
         """ Prints the string representation of an instance
         based on the class name and id """
         if arg:
@@ -120,7 +118,7 @@ class HBNBCommand(cmd.Cmd):
         else:
             print("** class name missing **")
 
-    def do_update(self, arg) -> None:
+    def do_update(self, arg):
         """updates an instance based on the class name and id
         Methodology: Create a new instance and setting the value
         to the instance"""
