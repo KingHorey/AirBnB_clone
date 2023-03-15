@@ -32,22 +32,20 @@ class HBNBCommand(cmd.Cmd):
                         key = "{}.{}".format(txt[0], txt[1])
                         tmp_instance = globals()[txt[0]](**db[key])
                         print_instance.append(str(tmp_instance))
+                print(print_instance)
+
             else:
                 print("** class doesn't exist **")
         else:
-            # storage.reload()
             db = storage.all()
-            # print(db)
             print("-------------\n\n\n")
             temp_instance = []
             for k in db.keys():
                 split_text = k.split(".")
                 key = "{}.{}".format(split_text[0], split_text[1])
                 tmp_instance = globals()[split_text[0]](**db[key])
-                # print("--> tmp", db[key])
                 print_instance.append(str(tmp_instance))
-            # print(temp_instance)
-        print(print_instance)
+            print(print_instance)
 
     def do_create(self, arg):
         """ creates a new instance, saves to JSON and prints id """
@@ -65,17 +63,20 @@ class HBNBCommand(cmd.Cmd):
         """ deletes an instance based on the class name and id """
         if (arg):
             text = arg.split(" ")
+            print(text)
             if text[0] in globals():
-                if len(text) == 2:
+                if len(text) >= 2:
                     name = text[0]
-                    ids = text[1]
+                    ids = text[1:]
+                    ids = "".join(ids)
                     key = "{}.{}".format(name, ids)
                     db = storage.all()
                     if key in db:
                         del db[key]
                         storage.save()
                         return
-                    print("** no instance found **")
+                    else:
+                        print("** no instance found **")
                 else:
                     print("** instance id missing **")
             else:
