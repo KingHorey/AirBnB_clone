@@ -123,7 +123,7 @@ class HBNBCommand(cmd.Cmd):
         Methodology: Create a new instance and setting the value
         to the instance"""
         if arg:
-            text = arg.split(" ")
+            text = arg.split()
             if text[0] in globals():
                 if len(text) == 2:
                     print("** attribute name missing **")
@@ -156,12 +156,16 @@ class HBNBCommand(cmd.Cmd):
                         BaseModel.save(obj1)
                     else:
                         print("** no instance found **")
+                        return
                 else:
                     print("** instance id missing **")
+                    return
             else:
                 print("** class doesn't exist **")
+                return
         else:
             print("** class name missing **")
+            return
 
 
 if __name__ == "__main__":
