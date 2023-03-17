@@ -11,4 +11,5 @@ class Amenity(BaseModel):
     name = ""
 
     def __init__(self, *args, **kwargs):
+        """ init for amenity """
         super().__init__(*args, **kwargs)
