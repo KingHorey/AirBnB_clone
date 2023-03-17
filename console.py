@@ -12,6 +12,12 @@ import cmd
 import readline
 import sys
 from models.base_model import BaseModel
+from models.user import User
+from models.place import Place
+from models.review import Review
+from models.amenity import Amenity
+from models.city import City
+from models.state import State
 from models import storage
 
 
@@ -23,8 +29,8 @@ class HBNBCommand(cmd.Cmd):
         """ prints a string representation of all instances """
         storage.reload()
         db = storage.all()
-        print_instance = []
         if arg:
+            print_instance = []
             if arg in globals():
                 for k in db.keys():
                     txt = k.split(".")
@@ -43,8 +49,8 @@ class HBNBCommand(cmd.Cmd):
                 split_text = k.split(".")
                 key = "{}.{}".format(split_text[0], split_text[1])
                 tmp_instance = globals()[split_text[0]](**db[key])
-                print_instance.append(str(tmp_instance))
-            print(print_instance)
+                temp_instance.append(str(tmp_instance))
+            print(temp_instance)
 
     def do_create(self, arg):
         """ creates a new instance, saves to JSON and prints id """
@@ -62,7 +68,6 @@ class HBNBCommand(cmd.Cmd):
         """ deletes an instance based on the class name and id """
         if (arg):
             text = arg.split(" ")
-            print(text)
             if text[0] in globals():
                 if len(text) >= 2:
                     name = text[0]
