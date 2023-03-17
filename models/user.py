@@ -6,10 +6,10 @@ from models.base_model import BaseModel
 
 class User(BaseModel):
     """ Create User class """
-    password = ""
-    email = ""
-    first_name = ""
-    last_name = ""
+    password = "" or None
+    email = "" or None
+    first_name = "" or None
+    last_name = "" or None
 
     def __init__(self, *args, **kwargs):
         """ ini class for User"""
