@@ -28,13 +28,12 @@ class BaseModel:
             self.created_at = datetime.today()
             self.updated_at = datetime.today()
             self.id = str(uuid4())
-            models.storage.new(self)
+            storage.new(self)
 
     def save(self):
         """ Method updated the updated_at attribute of the object """
         time = datetime.now()
         self.updated_at = time
-        #storage.save()
 
     def to_dict(self):
         """ added __class__ key and value to __dict__
@@ -45,6 +44,6 @@ class BaseModel:
 
     def __str__(self):
         """ returns a printable dict of the instance """
-        output = "[" + str(self.__class__.__name__) + "] "
-        output += "("+str(self.id)+") " + str(self.__dict__)
+        output = "[{}]"+"({})"+"({})".format(self.__class__name,
+                                             self.id, self.__dict__)
         return (output)
