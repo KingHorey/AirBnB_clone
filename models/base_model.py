@@ -24,7 +24,7 @@ class BaseModel:
     def __init__(self):
         """class initialsation method"""
         self.created_at = datetime.datetime.now()
-        self.created_at = datetime.datetime.now()
+        self.updated_at = datetime.datetime.now()
         self.id = str(uuid.uuid4())
 
     def __str__(self):
