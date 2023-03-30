@@ -6,8 +6,9 @@ import storage to save into json file
 """
 
 from datetime import datetime
-from uuid import uuid4
+import uuid
 from . import storage
+import models
 
 
 class BaseModel:
@@ -27,8 +28,8 @@ class BaseModel:
         else:
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
-            self.id = str(uuid4())
-            storage.new(self)
+            self.id = str(uuid.uuid4())
+            models.storage.new(self)
 
     def save(self):
         """ Method updated the updated_at attribute of the object """
