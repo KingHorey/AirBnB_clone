@@ -24,10 +24,10 @@ class BaseModel:
     def __init__(self, *args, **kwargs):
         """class initialsation method"""
         if (**kwargs):
-            self.created_at = strptime(kwargs.get("created_at"),
-                                       "%Y-%m-%dT%H:%M:%S.%f")
-            self.updated_at = strptime(kwargs.get("updated_at"),
-                                       "%Y-%m-%dT%H:%M:%S.%f")
+            self.created_at = datetime.datetime.strptime(
+                            kwargs.get("created_at"), "%Y-%m-%dT%H:%M:%S.%f")
+            self.updated_at = datetime.datetime.strptime(
+                            kwargs.get("updated_at"), "%Y-%m-%dT%H:%M:%S.%f")
             self.id = kwargs.get("id")
             dirs = ["created_at", "updated_at", "id", "__class__"]
             for k, v in kwargs.items():
