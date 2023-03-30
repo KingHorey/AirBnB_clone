@@ -44,6 +44,6 @@ class BaseModel:
 
     def __str__(self):
         """ returns a printable dict of the instance """
-        output = "[{}]"+"({})"+"({})".format(self.__class__name,
+        output = ["{}"]+("{}")+("{}").format(self.__class__name,
                                              self.id, self.__dict__)
         return (output)
