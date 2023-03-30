@@ -16,17 +16,17 @@ class BaseModel:
         if (kwargs):
             {k: v for k, v in kwargs.items() if k != "__class__"}
             self.created_at = datetime.strptime(kwargs.get('created_at'),
-                                                "%Y-%m-%d %H:%M:%S.%f")
+                                                "%Y-%m-%dT%H:%M:%S.%f")
             self.updated_at = datetime.strptime(kwargs.get('updated_at'),
-                                                "%Y-%m-%d %H:%M:%S.%f")
+                                                "%Y-%m-%dT%H:%M:%S.%f")
             self.id = kwargs.get('id')
             dirs = ["updated_at", "created_at", "id", "__class__"]
             for k, v in kwargs.items():
                 if k not in dirs:
                     setattr(self, k, v)
         else:
-            self.created_at = datetime.today()
-            self.updated_at = datetime.today()
+            self.created_at = datetime.now()
+            self.updated_at = datetime.now()
             self.id = str(uuid4())
             storage.new(self)
 
