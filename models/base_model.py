@@ -1,8 +1,12 @@
 #!/usr/bin/python3
 
+""" import datetime to set created_at, updated_at
+and uuid to set id
+import storage to save into json file
+"""
+
 from datetime import datetime
 from uuid import uuid4
-import json
 from . import storage
 
 
@@ -24,13 +28,13 @@ class BaseModel:
             self.created_at = datetime.today()
             self.updated_at = datetime.today()
             self.id = str(uuid4())
-            storage.new(self)
+            models.storage.new(self)
 
     def save(self):
         """ Method updated the updated_at attribute of the object """
         time = datetime.now()
         self.updated_at = time
-        storage.save()
+        #storage.save()
 
     def to_dict(self):
         """ added __class__ key and value to __dict__
@@ -43,5 +47,4 @@ class BaseModel:
         """ returns a printable dict of the instance """
         output = "[" + str(self.__class__.__name__) + "] "
         output += "("+str(self.id)+") " + str(self.__dict__)
-        output.strip()
         return (output)
