@@ -1,50 +1,47 @@
 #!/usr/bin/python3
 
-""" import datetime to set created_at, updated_at
-and uuid to set id
-import storage to save into json file
-"""
 
-from datetime import datetime
+""" The datetime module is used to know the time and date the
+instance was created and the uuid module for getting the unique
+identifier of each instance """
+
+import datetime
 import uuid
-from . import storage
-import models
 
 
 class BaseModel:
-    """ Base model to be used in instantiation """
-    def __init__(self, *args, **kwargs):
-        if (kwargs):
-            {k: v for k, v in kwargs.items() if k != "__class__"}
-            self.created_at = datetime.strptime(kwargs.get('created_at'),
-                                                "%Y-%m-%dT%H:%M:%S.%f")
-            self.updated_at = datetime.strptime(kwargs.get('updated_at'),
-                                                "%Y-%m-%dT%H:%M:%S.%f")
-            self.id = kwargs.get('id')
-            dirs = ["updated_at", "created_at", "id", "__class__"]
-            for k, v in kwargs.items():
-                if k not in dirs:
-                    setattr(self, k, v)
-        else:
-            self.created_at = datetime.now()
-            self.updated_at = datetime.now()
-            self.id = str(uuid.uuid4())
-            models.storage.new(self)
+    """ BaseModel class contains the common attributes
+    that each child class would share from
 
-    def save(self):
-        """ Method updated the updated_at attribute of the object """
-        time = datetime.now()
-        self.updated_at = time
+    Basic Attributes are:
+    1. created_at: The date and time that the instance was created
+    2. updated_at: The date and time that the instance after being created
+    was updated with new information. By default, shares created_at value when
+    an instance is created
+    3. id: The unique identifier for each instance
+    Note: id has been converted to a string """
 
-    def to_dict(self):
-        """ added __class__ key and value to __dict__
-        return value: dictionary """
-        self.__dict__.update({"__class__": self.__class__.__name__})
-        return ({k: v if isinstance(v, int) else str(v)
-                 for k, v in self.__dict__.items()})
+    def __init__(self):
+        """class initialsation method"""
+        self.created_at = datetime.datetime.now()
+        self.created_at = datetime.datetime.now()
+        self.id = str(uuid.uuid4())
 
     def __str__(self):
-        """ returns a printable dict of the instance """
-        output = "[{}] ({}) {}".format(self.__class__.__name__,
+        """ returns a printable information of instance """
+        result = "[{}] ({}) {}".format(self.__class__.__name__,
                                        self.id, self.__dict__)
-        return (output)
+        return result
+
+    def save(self):
+        """ updates the attribute update_at"""
+        self.updated_at = datetime.datetime.now()
+
+    def to_dict(self):
+        """ Method returns a dictionary representation of the instance ""
+        and adds the class name to the dictionary """
+        new_dict = self.__dict__.copy()
+        new_dict["__class__"] = self.__class__.__name__
+        new_dict["created_at"] = new_dict["created_at"].isoformat()
+        new_dict["updated_at"] = new_dict["updatd_at"].isoformat()
+        return (new_dict)
