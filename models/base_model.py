@@ -21,11 +21,22 @@ class BaseModel:
     3. id: The unique identifier for each instance
     Note: id has been converted to a string """
 
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         """class initialsation method"""
-        self.created_at = datetime.datetime.now()
-        self.updated_at = datetime.datetime.now()
-        self.id = str(uuid.uuid4())
+        if (**kwargs):
+            self.created_at = strptime(kwargs.get("created_at"),
+                                       "%Y-%m-%dT%H:%M:%S.%f")
+            self.updated_at = strptime(kwargs.get("updated_at"),
+                                       "%Y-%m-%dT%H:%M:%S.%f")
+            self.id = kwargs.get("id")
+            dirs = ["created_at", "updated_at", "id", "__class__"]
+            for k, v in kwargs.items():
+                if k not in dirs:
+                    setattr(self, k, v)
+        else:
+            self.created_at = datetime.datetime.now()
+            self.updated_at = datetime.datetime.now()
+            self.id = str(uuid.uuid4())
 
     def __str__(self):
         """ returns a printable information of instance """
