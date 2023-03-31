@@ -23,7 +23,7 @@ class BaseModel:
 
     def __init__(self, *args, **kwargs):
         """class initialsation method"""
-        if (**kwargs):
+        if (kwargs):
             self.created_at = datetime.datetime.strptime(
                             kwargs.get("created_at"), "%Y-%m-%dT%H:%M:%S.%f")
             self.updated_at = datetime.datetime.strptime(
