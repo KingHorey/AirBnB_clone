@@ -23,8 +23,8 @@ class BaseModel:
     Note: id has been converted to a string """
 
     def __init__(self, *args, **kwargs):
-        """class initialsation method"""
-        if (kwargs):
+        """class initialization method"""
+        if kwargs:
             self.created_at = datetime.datetime.strptime(
                             kwargs.get("created_at"), "%Y-%m-%dT%H:%M:%S.%f")
             self.updated_at = datetime.datetime.strptime(
@@ -41,7 +41,7 @@ class BaseModel:
             storage.new(self)
 
     def __str__(self):
-        """ returns a printable information of instance """
+        """ returns printable information of instance """
         result = "[{}] ({}) {}".format(self.__class__.__name__,
                                        self.id, self.__dict__)
         return result
@@ -58,4 +58,4 @@ class BaseModel:
         new_dict["__class__"] = self.__class__.__name__
         new_dict["created_at"] = new_dict["created_at"].isoformat()
         new_dict["updated_at"] = new_dict["updated_at"].isoformat()
-        return (new_dict)
+        return new_dict
