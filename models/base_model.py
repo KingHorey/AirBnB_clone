@@ -7,6 +7,7 @@ identifier of each instance """
 
 import datetime
 import uuid
+from . import storage
 
 
 class BaseModel:
@@ -37,6 +38,7 @@ class BaseModel:
             self.created_at = datetime.datetime.now()
             self.updated_at = datetime.datetime.now()
             self.id = str(uuid.uuid4())
+            storage.new(self)
 
     def __str__(self):
         """ returns a printable information of instance """
@@ -47,6 +49,7 @@ class BaseModel:
     def save(self):
         """ updates the attribute update_at"""
         self.updated_at = datetime.datetime.now()
+        storage.save()
 
     def to_dict(self):
         """ Method returns a dictionary representation of the instance ""

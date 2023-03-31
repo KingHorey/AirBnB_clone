@@ -14,7 +14,3 @@ my_model.name = "My_First_Model"
 my_model.my_number = 89
 my_model.save()
 print(my_model)
-all_objs = storage.all()
-for i in all_objs.keys():
-    print(i)
-
