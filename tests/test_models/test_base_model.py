@@ -6,6 +6,7 @@ import unittest
 from models.base_model import BaseModel as base
 from models.engine.file_storage import FileStorage as file
 import datetime
+import tempfile
 
 
 class TestBaseModel(unittest.TestCase):
@@ -64,8 +65,6 @@ class TestStorage(unittest.TestCase):
                 self.storage.save(self)
 
     def test_reload(self):
-
-
         with self.assertRaises(FileNotFoundError):
-            with open("te.txt") as fq:
+            with open("te.json") as fq:
                 self.storage.reload(self)
