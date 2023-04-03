@@ -35,8 +35,11 @@ class FileStorage:
 
     def save(self):
         """ saves information into JSON file"""
-        for key in FileStorage.__objects.keys():
-            to_dicts = FileStorage.__objects[key].to_dict()
+        for key, value in FileStorage.__objects.items():
+            if isinstance(value, dict):
+                FileStorage.__objects[key] = value
+            else:
+                to_dicts = value.to_dict()
             FileStorage.__objects[key] = to_dicts
             # FileStorage.__objects.update({key: value.to_dict()})
         with open(FileStorage.__file_path, mode="w", encoding="UTF-8") as \
