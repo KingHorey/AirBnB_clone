@@ -36,7 +36,14 @@ class TestStorage(unittest.TestCase):
         self.storage = file()
 
     def test_all(self):
-        self.assertEqual(type(self.storage.all()), dict)
+        self.assertIs(type(self.storage.all()), dict)
+
+    def test_file_paths(self):
+        self.assertEqual(str, type(self.storage._FileStorage__file_path))
+        # data = self.storage._FileStorage__file_path.split(".")
+        # with self.assertRaises(TypeError):
+        #     self.assertEqual(data[-1], "json")
+
 
     def test_new(self):
         self.assertTrue(type(self.storage._FileStorage__objects), dict)
@@ -49,7 +56,7 @@ class TestStorage(unittest.TestCase):
     def test_path(self):
         with self.assertRaises(FileNotFoundError):
             with open(self.storage._FileStorage__file_path) as file:
-                f.read()
+                file.read()
 
     def test_save(self):
         with self.assertRaises(FileNotFoundError):
@@ -57,6 +64,8 @@ class TestStorage(unittest.TestCase):
                 self.storage.save(self)
 
     def test_reload(self):
+
+
         with self.assertRaises(FileNotFoundError):
             with open("te.txt") as fq:
                 self.storage.reload(self)

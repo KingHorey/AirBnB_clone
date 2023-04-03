@@ -6,7 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="49d9516e-299e-49c2-b23d-e7bb45360d3d" name="Changes" comment="test cases I">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/test/test_models/test_storage.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/file.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/engine/test_base_model.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/test_models/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/test_models/test_base_model.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/test_models/test_storage.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_models/test_base_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_models/test_base_model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_models/test_engine/test_storage.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_models/test_engine/test_storage.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,7 +39,7 @@
     "settings.editor.selected.configurable": "preferences.sourceCode"
   }
 }]]></component>
-  <component name="RunManager" selected="Python.test_save_reload_base_model">
+  <component name="RunManager" selected="Python tests.Python tests in test_storage.py">
     <configuration name="test_save_reload_base_model" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="AirBnB_clone" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -69,8 +75,23 @@
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
+    <configuration name="Python tests in test_storage.py" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="AirBnB_clone" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/test/test_models" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/test/test_models/test_storage.py&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python tests.Python tests in test_storage.py" />
         <item itemvalue="Python.test_save_reload_base_model" />
         <item itemvalue="Python tests.Python tests for test_storage.TestStorage.test_all" />
       </list>
