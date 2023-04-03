@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="49d9516e-299e-49c2-b23d-e7bb45360d3d" name="Changes" comment="test cases">
+    <list default="true" id="49d9516e-299e-49c2-b23d-e7bb45360d3d" name="Changes" comment="test cases I">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/engine/file_storage.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/engine/file_storage.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/test/test_models/test_storage.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/test/test_models/test_storage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/test/test_models/test_storage.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,7 +99,14 @@
       <option name="project" value="LOCAL" />
       <updated>1680487449596</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="test cases I">
+      <created>1680490420198</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1680490420198</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -117,6 +123,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="to_dicts() rereferenced" />
     <MESSAGE value="test cases" />
-    <option name="LAST_COMMIT_MESSAGE" value="test cases" />
+    <MESSAGE value="test cases I" />
+    <option name="LAST_COMMIT_MESSAGE" value="test cases I" />
   </component>
 </project>
