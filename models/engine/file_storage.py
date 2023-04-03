@@ -32,6 +32,7 @@ class FileStorage:
         """
         name = "{}.{}".format(obj.__class__.__name__, obj.id)
         self.__objects[name] = obj
+        # return self.__objects
 
     def save(self):
         """ saves information into JSON file"""
@@ -41,9 +42,12 @@ class FileStorage:
             else:
                 to_dicts = value.to_dict()
                 FileStorage.__objects[key] = to_dicts
-        with open(FileStorage.__file_path, mode="w", encoding="UTF-8") as \
-                file:
-            json.dump(FileStorage.__objects, file)
+        try:
+            with open(FileStorage.__file_path, mode="w", encoding="UTF-8") \
+                    as file:
+                json.dump(FileStorage.__objects, file)
+        except FileNotFoundError:
+            pass
 
     def reload(self):
         """ Deserializes from storage"""
