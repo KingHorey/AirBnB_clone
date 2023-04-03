@@ -9,7 +9,7 @@ import json
 class FileStorage:
     """ Filestorage class converts an instance into a json"""
 
-    __file_path = "file_storage.json"
+    __file_path = "file.json"
     __objects = {}
 
     def all(self):
