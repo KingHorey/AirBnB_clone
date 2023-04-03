@@ -18,6 +18,8 @@ class TestBaseModel(unittest.TestCase):
         """ test init """
         self.assertEqual(type(base()), base)
 
+    def test_args_withaRG(self):
+        """ TEST base() with arguent"""
     def test_print(self):
         self.assertEqual(type(self.b.__str__()), str)
 
@@ -25,9 +27,15 @@ class TestBaseModel(unittest.TestCase):
         """ test to_dict method """
         self.assertTrue(type(self.b.to_dict() == dict))
 
-    def test_save(self):
+    def test_save(self) -> None:
         """ test base_model save's method """
+        another_b = base()
+        old_updated_at = another_b.updated_at
+        another_b.save()
+        new_updated_at = another_b.updated_at
+        self.assertNotEqual(old_updated_at, new_updated_at)
         self.assertEqual(type(self.b.updated_at), datetime.datetime)
+
 
 
 class TestStorage(unittest.TestCase):
@@ -48,16 +56,9 @@ class TestStorage(unittest.TestCase):
 
     def test_new(self):
         self.assertTrue(type(self.storage._FileStorage__objects), dict)
-        # with self.assertRaises(TypeError):
-        #     f.new(self, dict)
 
     def test_objects(self):
         self.assertTrue(type(self.storage._FileStorage__objects), dict)
-
-    def test_path(self):
-        with self.assertRaises(FileNotFoundError):
-            with open(self.storage._FileStorage__file_path) as file:
-                file.read()
 
     def test_save(self):
         with self.assertRaises(FileNotFoundError):

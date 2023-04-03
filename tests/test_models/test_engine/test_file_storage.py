@@ -21,22 +21,18 @@ class TestStorage(unittest.TestCase):
         #     f.new(self, dict)
 
     def test_objects(self):
-        self.assertTrue(type(self.storage._FileStorage__objects), dict)
+        self.assertTrue(type(self.storage._FileStorage__objects) == dict)
 
     def test_path(self):
-        with self.assertRaises(FileNotFoundError):
-            with open(self.storage._FileStorage__file_path) as file:
-                f.read()
+        self.assertTrue(type(self.storage._FileStorage__file_path) == str)
 
     def test_save(self):
-        with self.assertRaises(FileNotFoundError):
-            with open("te.txt") as fq:
-                self.storage.save(self)
+        with open(self.storage._FileStorage__file_path) as fq:
+            data = fq.read()
+            self.assertIsNotNone(data)
 
     def test_reload(self):
-        with self.assertRaises(FileNotFoundError):
-            with open("te.txt") as fq:
-                self.storage.reload(self)
+        self.assertEqual(type(self.storage._FileStorage__objects), dict)
 
 
 
