@@ -11,12 +11,18 @@ class FileStorage:
 
     __file_path = "file_storage.json"
     __objects = {}
-    def __int__(self):
-        self.reload()
 
     def all(self):
         """ Returns the __objects dictionary """
-        return self.__objects
+        return FileStorage.__objects
+
+    def classes_list(self):
+        """ locally import BaseModel class"""
+        from models.base_model import BaseModel
+        info = {
+            "BaseModel": BaseModel
+        }
+        return info
 
     def new(self, obj):
         """ sets in __objects the object with the key being
@@ -28,31 +34,25 @@ class FileStorage:
         self.__objects[name] = obj
 
     def save(self):
-        """ serializes __objects to the JSON file """
-        objects_copy = self.__objects.copy()
-        new_dict = {}
-        for key, value in objects_copy.items():
-            if isinstance(value, dict):
-                new_dict[key] = value
-            else:
-                new_dict[key] = value.to_dict()
-        with open(self.__file_path, mode="w") as f:
-            json.dump(new_dict, f)
+        """ saves information into JSON file"""
+        for key in FileStorage.__objects.keys():
+            to_dicts = FileStorage.__objects[key].to_dict()
+            FileStorage.__objects[key] = to_dicts
+            # FileStorage.__objects.update({key: value.to_dict()})
+        with open(FileStorage.__file_path, mode="w", encoding="UTF-8") as \
+                file:
+            json.dump(FileStorage.__objects, file)
 
     def reload(self):
-        """ deserialized the JSON file to the file path """
+        """ Deserializes from storage"""
         try:
-            with open(self.__file_path, mode="r") as f:
-                data = json.load(f)
-                self.__objects = data
+            with open(FileStorage.__file_path, mode="r", encoding="UTF-8") as\
+                    file:
+                data = file.read()
+                dict_obj = json.loads(data)
+            for key, value in dict_obj.items():
+                ins = dict_obj[key].get("__class__")
+                tmp = self.classes_list()[ins](**value)
+                FileStorage.__objects.update({key: tmp})
         except FileNotFoundError:
             pass
-
-        # new_dict = {}
-        # for key, value in data.items():
-        #     class_name = data.get("__class__")
-        #     if class_name in globals():
-        #         tmp_instance = globals()[class_name](**value)
-        #         new_dict[key] = tmp_instance
-        # self.__objects = new_dict
-
