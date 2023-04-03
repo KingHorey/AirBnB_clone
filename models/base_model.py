@@ -9,7 +9,6 @@ import datetime
 import uuid
 from . import storage
 
-
 class BaseModel:
     """ BaseModel class contains the common attributes
     that each child class would share from

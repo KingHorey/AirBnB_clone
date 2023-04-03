@@ -40,8 +40,7 @@ class FileStorage:
                 FileStorage.__objects[key] = value
             else:
                 to_dicts = value.to_dict()
-            FileStorage.__objects[key] = to_dicts
-            # FileStorage.__objects.update({key: value.to_dict()})
+                FileStorage.__objects[key] = to_dicts
         with open(FileStorage.__file_path, mode="w", encoding="UTF-8") as \
                 file:
             json.dump(FileStorage.__objects, file)
