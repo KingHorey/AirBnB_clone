@@ -13,7 +13,7 @@ class TestStorage(unittest.TestCase):
         self.storage = f()
 
     def test_all(self):
-        self.assertEqual(type(self.storage.all(self)), dict)
+        self.assertEqual(type(self.storage.all()), dict)
 
     def test_new(self):
         self.assertTrue(type(self.storage._FileStorage__objects), dict)
