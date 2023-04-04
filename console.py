@@ -54,6 +54,8 @@ class HBNBCommand(cmd.Cmd):
                 base_model = globals()[arg]()
                 base_model.save()
                 print(base_model.id)
+            else:
+                print("** class doesn't exist **")
         else:
             print("** class name missing **")
 
@@ -121,6 +123,8 @@ class HBNBCommand(cmd.Cmd):
                             storage.save()
                     else:
                         print("** no instance found **")
+                else:
+                    print("** class doesn't exist **")
             elif len(text_split) == 1:
                 print("** instance id missing **")
             elif len(text_split) == 2:
