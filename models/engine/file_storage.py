@@ -19,8 +19,20 @@ class FileStorage:
     def classes_list(self):
         """ locally import BaseModel class"""
         from models.base_model import BaseModel
+        from models.user import User
+        from models.review import Review
+        from models.state import State
+        from models.city import City
+        from models.amenity import Amenity
+        from models.place import Place
         info = {
-            "BaseModel": BaseModel
+            "BaseModel": BaseModel,
+            "User": User,
+            "Review": Review,
+            "State": State,
+            "City": City,
+            "Amenity": Amenity,
+            "Place": Place
         }
         return info
 
@@ -32,7 +44,7 @@ class FileStorage:
         """
         name = "{}.{}".format(obj.__class__.__name__, obj.id)
         self.__objects[name] = obj
-        # return self.__objects
+        return self.__objects
 
     def save(self):
         """ saves information into JSON file"""
