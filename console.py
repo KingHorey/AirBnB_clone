@@ -7,6 +7,12 @@ features for testing code and backend services
     the interpreter
 3. import FileStorage: for storing information into local JSON
     file
+4. import User: for creating user instances
+5. import Review: instances for reviewing an home
+6. import City: for creating instances of city
+7. import Place
+8. import Amenity: for creating instances of amenities in each home
+9. import State: class for placing the state homes are located at
 """
 
 import cmd
@@ -14,6 +20,12 @@ import sys
 from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage as file
 from models import storage
+from models.user import User
+from models.place import Place
+from models.state import State
+from models.review import Review
+from models.amenity import Amenity
+from models.city import City
 
 
 class HBNBCommand(cmd.Cmd):
