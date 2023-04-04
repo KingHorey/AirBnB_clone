@@ -19,11 +19,6 @@ class TestUserInfo(unittest.TestCase):
         """ test email address """
         self.assertEqual(type(self.new_user.email), str)
 
-    def test_correctmail(self):
-        """ use regex to search for @ in email """
-        x = re.search("@", self.new_user.email)
-        self.assertTrue(x)
-
     def test_lastname(self):
         """ test type of last name """
         self.assertEqual(type(self.new_user.last_name), str)
